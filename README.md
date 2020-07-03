@@ -6,4 +6,5 @@ Para manter o arquivo [covid19-br.csv](covid19-br.csv) atualizado, utiliza-se o 
 ## Dependências
 
 * curl
+* jq
 * xlsx2csv
