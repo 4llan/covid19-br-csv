@@ -1,11 +1,11 @@
 # covid19-br-csv
-O objetivo deste repositório é manter o arquivo XLSX divulgado diariamente pelo Ministério da Saúde sobre os casos notificados do COVID-19 no Brasil em formato CSV.
+O objetivo deste repositório é manter o histórico do arquivo divulgado diariamente pelo Ministério da Saúde sobre os casos notificados do COVID-19 no Brasil em formato CSV.
 
 ## Dependências
 
 * curl
 * jq
-* xlsx2csv
+* unzip
 
 ## Automações
 
