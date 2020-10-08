@@ -22,9 +22,10 @@ case "${PORTAL_ARQUIVO##*.}" in
         ;;
     "rar")
         echo "Descompactando o arquivo RAR"
-        unrar x *.rar > /dev/null
-        cat HIST*.csv > $CSV_HIST
-        rm HIST*.csv
+        unrar x $PORTAL_ARQUIVO > /dev/null
+        tmpcsv=$(ls HIST*.csv)
+        cat $tmpcsv > $CSV_HIST
+        rm $tmpcsv
         ;;
     *)
         echo "Pela 301a vez no ano, o Ministério da Saúde mudou o formato do dado disponibilizado"
