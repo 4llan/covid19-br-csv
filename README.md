@@ -6,6 +6,7 @@ O objetivo deste repositório é manter o histórico do arquivo divulgado diaria
 * curl
 * jq
 * unzip
+* unrar-free
 
 ## Automações
 
