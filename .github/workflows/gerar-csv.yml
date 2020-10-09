@@ -2,7 +2,7 @@ name: gerar-csv
 
 on:
   schedule:
-    - cron: '30 06,22 * * *'
+    - cron: '30 06,18,19,22 * * *'
 
 jobs:
   run:

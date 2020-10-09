@@ -22,8 +22,8 @@ case "${PORTAL_ARQUIVO##*.}" in
         ;;
     "rar")
         echo "Descompactando o arquivo RAR"
-        unrar x $PORTAL_ARQUIVO > /dev/null
-        tmpcsv=$(ls HIST*.csv)
+        unrar x -o+ $PORTAL_ARQUIVO
+        tmpcsv=$(find . -maxdepth 1 -name "HIST*.csv")
         cat $tmpcsv > $CSV_HIST
         rm $tmpcsv
         ;;
