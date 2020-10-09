@@ -5,6 +5,7 @@ O objetivo deste repositório é manter o histórico do arquivo divulgado diaria
 
 * curl
 * jq
+* xlsx2csv
 * unzip
 * unrar-free
 

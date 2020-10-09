@@ -11,6 +11,27 @@ echo "Fazendo download do arquivo"
 curl -# -O -J $(jq -r '.results[0].arquivo.url' $JSON)
 
 case "${PORTAL_ARQUIVO##*.}" in
+    "xlsx")
+        echo "Convertendo o XLSX em CSV"
+        xlsx2csv -f "%Y-%m-%d" $PORTAL_ARQUIVO $PORTAL_ARQUIVO.csv
+
+        DELETE_XLSXCSV=1
+
+        if [[ $PORTAL_ARQUIVO == *"HIST"* ]]; then
+            echo "> HIST"
+            cat $PORTAL_ARQUIVO.csv > $CSV_HIST
+        else
+            echo "> HOJE"
+            if [[ $(head -1 $CSV_HIST) == $(head -1 $PORTAL_ARQUIVO.csv) ]]; then
+                tail -n+2 $PORTAL_ARQUIVO.csv >> $CSV_HIST
+            else
+                echo "> O cabeçalho dos arquivos CSV estão diferentes. Não será possível mesclar conteúdo no arquivo principal"
+                DELETE_XLSXCSV=0
+            fi
+        fi
+
+        [ $DELETE_XLSXCSV -eq 1 ] && rm $PORTAL_ARQUIVO.csv
+        ;;
     "zip")
         echo "Descompactando o arquivo CSV"
         unzip -p $PORTAL_ARQUIVO > $CSV_HIST
