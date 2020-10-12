@@ -50,5 +50,6 @@ case "${PORTAL_ARQUIVO##*.}" in
         ;;
     *)
         echo "Pela 301a vez no ano, o Ministério da Saúde mudou o formato do dado disponibilizado"
+        exit 1
         ;;
 esac
