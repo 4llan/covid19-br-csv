@@ -9,7 +9,7 @@ O objetivo deste repositório era manter o histórico do arquivo divulgado diari
 * unzip
 * unrar-free
 * gzip
-* sha1sum
+* sha1sum (coreutils)
 
 
 ## Automações
