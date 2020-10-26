@@ -61,3 +61,4 @@ esac
 sha1sum -c --status "$CSV_HIST.sha1"
 [ $? -ne 0 ] && sha1sum "$CSV_HIST" > $CSV_HIST.sha1 && gzip -f $CSV_HIST
 [ -f "$CSV_HIST" ] && rm -rf $CSV_HIST
+exit 0
