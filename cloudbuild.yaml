@@ -1,3 +1,9 @@
 steps:
-- name: gcr.io/cloud-builders/gsutil
-  args: ['cp', '*.gz', 'gs://${_BUCKET_NAME}']
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    gunzip *.csv.gz
+    gsutil cp *.csv gs://${_BUCKET_NAME}
+  
