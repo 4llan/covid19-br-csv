@@ -18,19 +18,11 @@ jobs:
 
     - name: Run gerar-csv.sh
       run: ./gerar-csv.sh
-    
-    - name: Set environment variables
-      run: echo "::set-env name=updatedAt::$(jq -r '.results[0].updatedAt' *.json)"
       
-    - name: Git Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v4.3.0
-      with:
-        # Commit message
-        commit_message: ${{ env.updatedAt }}
-        # File pattern used for `git add`. For example `src/\*.js`
-        #file_pattern: "*.csv"
-        ##commit_user_name: # optional, default is GitHub Actions
-        # Email address used for the commit user
-        ##commit_user_email: # optional, default is actions@github.com
-        # Value used for the commit author. Defaults to the username of whoever triggered this workflow run.
-        ##commit_author: # optional, default is ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+    - name: Git add and commit
+      run: |
+        git add .
+        git -c user.name="GitHub Actions" -c user.email="actions@github.com" \
+          commit -m "$(cat last-update.txt)" \
+          --author="${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
+        git push origin
