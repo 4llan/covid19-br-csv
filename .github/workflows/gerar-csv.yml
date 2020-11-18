@@ -21,8 +21,10 @@ jobs:
       
     - name: Git add and commit
       run: |
-        git add .
-        git -c user.name="GitHub Actions" -c user.email="actions@github.com" \
-          commit -m "$(cat last-update.txt)" \
-          --author="${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
-        git push origin
+        if [ -n "$(git status -s -- .)" ]; then
+          git add .
+          git -c user.name="GitHub Actions" -c user.email="actions@github.com" \
+            commit -m "$(cat last-update.txt)" \
+            --author="${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
+          git push origin
+        fi
