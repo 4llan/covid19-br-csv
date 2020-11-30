@@ -7,12 +7,12 @@ echo "Fazendo download do arquivo JSON"
 curl -# "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral" -H "X-Parse-Application-Id: unAFkcaNDeXajurGB7LChj8SgQYS2ptm" --compressed -o $JSON
 
 [ $(jq -r '.results[0].updatedAt' $JSON) == $(cat $updatedAt) ] && cat $updatedAt && exit 0
-jq -r '.results[0].updatedAt' $JSON > $updatedAt
 
 PORTAL_ARQUIVO=$(jq -r '.results[0].arquivo.name' $JSON)
 
 echo "Fazendo download do arquivo"
-curl -# -O -J $(jq -r '.results[0].arquivo.url' $JSON)
+curl -f -# -O -J $(jq -r '.results[0].arquivo.url' $JSON)
+[ $? -ne 0 ] && exit 1
 
 [ -f "$CSV_HIST.gz" ] && gzip -d -c $CSV_HIST.gz > $CSV_HIST
 case "${PORTAL_ARQUIVO##*.}" in
@@ -61,4 +61,5 @@ esac
 sha1sum -c --status "$CSV_HIST.sha1"
 [ $? -ne 0 ] && sha1sum "$CSV_HIST" > $CSV_HIST.sha1 && gzip -f $CSV_HIST
 [ -f "$CSV_HIST" ] && rm -rf $CSV_HIST
+jq -r '.results[0].updatedAt' $JSON > $updatedAt
 exit 0
