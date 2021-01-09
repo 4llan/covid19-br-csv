@@ -14,7 +14,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt install -y jq xlsx2csv unzip unrar-free gzip coreutils
+      run: sudo apt update && sudo apt install -y jq xlsx2csv unzip unrar-free gzip coreutils
 
     - name: Run gerar-csv.sh
       run: ./gerar-csv.sh
