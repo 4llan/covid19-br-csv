@@ -48,9 +48,10 @@ case "${PORTAL_ARQUIVO##*.}" in
         ;;
     "rar")
         echo "Descompactando o arquivo RAR"
-        unrar x -o+ $PORTAL_ARQUIVO
+        7z x -aoa $PORTAL_ARQUIVO
+        mv $(find . -maxdepth 1 -name "HIST*.csv" -print | sort | head -1) $CSV_HIST
         tmpcsv=$(find . -maxdepth 1 -name "HIST*.csv")
-        cat $tmpcsv > $CSV_HIST
+        tail -n+2 -q $tmpcsv >> $CSV_HIST
         rm $tmpcsv
         ;;
     *)
