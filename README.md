@@ -6,8 +6,7 @@ O objetivo deste repositório era manter o histórico do arquivo divulgado diari
 * curl
 * jq
 * xlsx2csv
-* unzip
-* unrar-free
+* 7z (p7zip-full)
 * gzip
 * sha1sum (coreutils)
 

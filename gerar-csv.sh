@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 JSON=portal.json
 CSV_HIST=covid19-br.csv
 updatedAt=last-update.txt
@@ -37,17 +37,13 @@ case "${PORTAL_ARQUIVO##*.}" in
 
         [ $DELETE_XLSXCSV -eq 1 ] && rm $PORTAL_ARQUIVO.csv
         ;;
-    "zip")
-        echo "Descompactando o arquivo ZIP"
-        unzip -p $PORTAL_ARQUIVO > $CSV_HIST
-        ;;
     "csv")
         echo "Substituindo o arquivo CSV"
         cat $PORTAL_ARQUIVO > $CSV_HIST
         rm $PORTAL_ARQUIVO
         ;;
-    "rar")
-        echo "Descompactando o arquivo RAR"
+    "rar" | "zip")
+        echo "Descompactando o arquivo"
         7z x -aoa $PORTAL_ARQUIVO
         mv $(find . -maxdepth 1 -name "HIST*.csv" -print | sort | head -1) $CSV_HIST
         tmpcsv=$(find . -maxdepth 1 -name "HIST*.csv")
