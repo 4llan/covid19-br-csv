@@ -42,7 +42,7 @@ case "${PORTAL_ARQUIVO##*.}" in
         cat $PORTAL_ARQUIVO > $CSV_HIST
         rm $PORTAL_ARQUIVO
         ;;
-    "rar" | "zip")
+    "rar" | "zip" | "7z")
         echo "Descompactando o arquivo"
         7z x -aoa $PORTAL_ARQUIVO
         mv $(find . -maxdepth 1 -name "HIST*.csv" -print | sort | head -1) $CSV_HIST
