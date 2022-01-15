@@ -4,7 +4,7 @@ CSV_HIST=covid19-br.csv
 updatedAt=last-update.txt
 
 echo "Fazendo download do arquivo JSON"
-curl -# "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral" -H "X-Parse-Application-Id: unAFkcaNDeXajurGB7LChj8SgQYS2ptm" --compressed -o $JSON
+curl -# "https://qd28tcd6b5.execute-api.sa-east-1.amazonaws.com/prod/PortalGeral" -H "X-Parse-Application-Id: unAFkcaNDeXajurGB7LChj8SgQYS2ptm" --compressed -o $JSON
 
 [ $(jq -r '.results[0].updatedAt' $JSON) == $(cat $updatedAt) ] && cat $updatedAt && exit 0
 
