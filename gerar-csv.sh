@@ -11,7 +11,7 @@ curl -# "https://qd28tcd6b5.execute-api.sa-east-1.amazonaws.com/prod/PortalGeral
 PORTAL_ARQUIVO=$(jq -r '.results[0].arquivo.name' $JSON)
 
 echo "Fazendo download do arquivo"
-curl -f -# -O -J $(jq -r '.results[0].arquivo.url' $JSON)
+curl -f -# -O --proxy "http://201.91.82.155:3128" -J $(jq -r '.results[0].arquivo.url' $JSON)
 [ $? -ne 0 ] && exit 1
 
 [ -f "$CSV_HIST.gz" ] && gzip -d -c $CSV_HIST.gz > $CSV_HIST
